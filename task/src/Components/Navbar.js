@@ -15,7 +15,6 @@ function Navbar() {
     const [activeButton, setActiveButton] = useState("shop");
 
     const signOut = () => {
-        localStorage.removeItem('userData');
         axios.get('/api/logout').then(() => {
             navigate("/");
         });

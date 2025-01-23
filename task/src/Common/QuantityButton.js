@@ -1,4 +1,3 @@
-import { IconButton } from '@mui/material';
 import React, { useState } from 'react';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
@@ -27,14 +26,14 @@ function QuantityButton({ quantity, maxQuantity, onChange }) {
     };
 
     return (
-        <div>
-            <IconButton color="secondary" size="small" aria-label="delete" onClick={decreaseQuantity} disabled={localQuantity <= 0}>
-                <RemoveIcon fontSize='inherit' style={{border: "1px solid #a6859a"}} />
-            </IconButton>
-            <span> {localQuantity} </span>
-            <IconButton color="secondary" size="small" aria-label="delete" onClick={increaseQuantity} disabled={localQuantity >= maxQuantity}>
-                <AddIcon fontSize='inherit' style={{border: "1px solid #a6859a"}}/>
-            </IconButton>
+        <div className='border-design'>
+            <button className='button-color' style={{borderTopRightRadius: '0', borderBottomRightRadius: '0'}} size="small" aria-label="delete" onClick={decreaseQuantity} disabled={localQuantity < 0}>
+                <RemoveIcon fontSize='inherit'/>
+            </button>
+            <span className='fw-bold px-2'> {localQuantity} </span>
+            <button className='button-color' style={{borderBottomLeftRadius: '0', borderTopLeftRadius: '0'}} size="small" aria-label="delete" onClick={increaseQuantity} disabled={localQuantity >= maxQuantity}>
+                <AddIcon fontSize='inherit'/>
+            </button>
         </div>
     );
 }

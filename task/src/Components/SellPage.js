@@ -63,13 +63,14 @@ function SellPage() {
                                     <img src={`http://localhost:3000/uploads/${product.imageUrl}`} className='card-image' alt="alternate" />
                                     <div className='d-flex align-items-end justify-content-between'>
                                         <div>
-                                            <h5>{product.title}</h5>
+                                            <h5 className='my-0'>{product.title}</h5>
                                             <div><ViewMore text={product.description} maxLength={25} /></div>
-                                            <strong>₹{product.amount}</strong>
+                                            <strong className='fs-4'><h6 className='d-inline'>₹</h6>{product.amount}</strong>
                                             <div>
-                                            {product.quantity > 0 ? (
-                                                <><strong>Availability:</strong> {product.quantity}</>
-                                            ) : 'Out of Stock'}
+                                            {product.quantity > 0 ?
+                                                <span className="badge bg-success mb-1">In stock: {product.quantity}</span>
+                                                : <span className="badge bg-warning mb-1">Out of stock</span>
+                                            }
                                         </div>
                                         </div>
                                         <div className='d-flex justify-content-end align-items-end'>

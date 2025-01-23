@@ -2,14 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAllShopItems, setItemQuantity, updateCartData } from '../Redux/Slice/productSlice.js';
 import { getAllProducts, getFilteredData, updateUserCart } from '../Services/productService.js';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import "../Styles/FormStyle.css";
 import { grey } from '@mui/material/colors';
 import TimeAgo from 'react-timeago';
 import ViewMore from '../Common/ViewMore.js';
 import { ToastMessage } from '../Common/Toast.js';
-import { IconButton } from '@mui/material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useNavigate } from 'react-router-dom';
 
 function ShopPage() {
@@ -24,9 +21,10 @@ function ShopPage() {
         })
             .catch((error) => {
                 console.error('Error fetching products:', error);
+                navigate('/403');
                 dispatch(setAllShopItems([]));
             });
-    }, [dispatch]);
+    }, [dispatch, navigate]);
 
     const addToCart = (itemId) => {
         const userId = JSON.parse(localStorage.getItem('userData'))._id;
@@ -58,7 +56,6 @@ function ShopPage() {
                 });
         }
     };
-
 
     const viewProduct = (productId) => {
         navigate(`/shop/${productId}`, { state: { products, productId } })
@@ -110,23 +107,25 @@ function ShopPage() {
                                     <img src={`http://localhost:3000/uploads/${product.imageUrl}`} className='card-image' alt="alternate" />
                                     <div className='d-flex align-items-end justify-content-between'>
                                         <div>
-                                            <h5>{product.title}</h5>
+                                            <h5 className='my-0'>{product.title}</h5>
                                             {product.quantity > 0 ?
-                                                <span className="badge bg-info">In stock</span>
-                                                : <span className="badge bg-warning">Out of stock</span>
+                                                <span className="badge bg-success mb-1">In stock</span>
+                                                : <span className="badge bg-warning mb-1">Out of stock</span>
                                             }
-                                            <div><ViewMore text={product.description} maxLength={25} /></div>
-                                            <strong>₹{product.amount}</strong>
+                                            <div><ViewMore text={product.description} maxLength={15} /></div>
+                                            <strong className='fs-5'><h6 className='d-inline'>₹</h6>{product.amount}</strong>
                                         </div>
                                         <div className='d-flex justify-content-end align-items-end'>
+                                            <span className='px-1'>
+                                                <button className='button-color' title="View Product" size="small" onClick={() => viewProduct(product._id)} >
+                                                    View Product
+                                                </button>
+                                            </span>
                                             <span>
-                                                <IconButton title="View Product" color="secondary" size="medium" onClick={() => viewProduct(product._id)}>
-                                                    <VisibilityIcon fontSize='inherit' />
-                                                </IconButton>
                                                 {product.quantity > 0 &&
-                                                    <IconButton title="Add to Cart" color="secondary" size="medium" onClick={() => addToCart(product._id)}>
-                                                        <AddShoppingCartIcon fontSize='inherit' />
-                                                    </IconButton>}
+                                                    <button className='button-color' title="Add to Cart" size="small" onClick={() => addToCart(product._id)} >
+                                                        Add to Cart
+                                                    </button>}
                                             </span>
                                         </div>
                                     </div>

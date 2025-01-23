@@ -27,19 +27,19 @@ function OrderHistory() {
                         <div key={order._id} className="col-md-6 col-lg-4 mb-4">
                             <div className="card shadow-sm">
                                 <div className="card-body">
-                                    <h5 className="card-title">{order.itemId?.title}</h5>
-                                    <p className="card-text">
+                                    <h5 className="card-title my-0">{order.itemId?.title}</h5>
+                                    <p className="card-text my-0">
                                         Quantity: {order.quantity}
                                     </p>
                                     <img src={`http://localhost:3000/uploads/${order.itemId?.imageUrl}`} className='card-image' alt="alternate" />
-                                    <p className="card-text">
+                                    <p className="card-text my-0">
                                         <ViewMore
                                             text={order.itemId?.description}
                                             maxLength={25}
                                         />
                                     </p>
-                                    <p className="card-text">
-                                        <strong>Price: ₹{order.itemId?.amount}</strong>
+                                    <p className="card-text my-0">
+                                        <strong className='fs-5'>Price: <h6 className='d-inline'>₹</h6>{order.itemId?.amount}</strong>
                                     </p>
                                 </div>
                             </div>

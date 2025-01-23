@@ -7,6 +7,7 @@ import QuantityButton from '../Common/QuantityButton.js';
 import { ToastMessage } from '../Common/Toast.js';
 import { IconButton } from '@mui/material';
 import ViewMore from '../Common/ViewMore.js';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function CartPage() {
     const dispatch = useDispatch();
@@ -70,7 +71,10 @@ function CartPage() {
                                                     <strong>₹{product.itemId.amount}</strong>
                                                 </div>
                                                 <div className='d-flex justify-content-end align-items-end'>
-                                                    <div className='d-flex align-items-end'>
+                                                    <div className='d-flex align-items-end gap-3'>
+                                                        <button className='button-color' onClick={() => handleQuantityChange(product.itemId._id, 0)}> 
+                                                            Remove From Cart
+                                                        </button>
                                                         <QuantityButton
                                                             quantity={product.quantity ? product.quantity : 1}
                                                             maxQuantity={product.itemId.quantity}

@@ -14,13 +14,36 @@ h2 { font-family: "DM Serif Text", serif; }
 
 .pointer { cursor: pointer; }
 
-.text-color { color: #991e56; }
+.text-color { 
+    color: #EF7C8E; 
+    font-weight: bolder;
+}
 
 .text-color:hover { color: #e14658; }
 
-.bg-color { background-color: #a6859a; }
+.button-color { 
+    background-color: #e5b7a6;
+    color: black;
+    font-weight: 600;
+    border: none; 
+    border-radius: 20px; 
+    padding: 10px 13px;  
+    font-size: 12px;
+    cursor: pointer; 
+    transition: all 0.3s ease;
+    text-align: center; 
+}
 
-/* .bg-color:hover { background-color: #e14658; } */
+.border-design {
+    border: 1px solid #e5b7a6;
+    border-radius: 20px;
+}
+
+.bg-color { background-color: #D8A7B1; }
+
+.button-color:hover { 
+    background-color: #e9d0c6;
+}
 
 .bg-blur { background: rgba(0, 0, 0, 0.5) }
 

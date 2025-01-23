@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import '../Styles/FormStyle.css';
 import { validate } from '../Utilities/FormUtils.js'
 import { getAllCountries, getAllStates, onSignUp } from "../Services/loginService.js";
@@ -27,7 +27,7 @@ function SignUp({ onToggleLogin }) {
         }));
     };
 
-    const getCountries = (e) => {
+    useEffect (() => {
         getAllCountries().then((response) => {
             setCountries(response.data || []);
             userData.state = "";
@@ -35,7 +35,7 @@ function SignUp({ onToggleLogin }) {
             .catch((error) => {
                 console.log("Error occured", error)
             });
-    };
+    }, []);
 
     const getStates = (e) => {
         getAllStates(userData.country).then((response) => {
@@ -141,7 +141,7 @@ function SignUp({ onToggleLogin }) {
                         <div className="col-lg-6 col-md-6 col-sm-12">
                             <div className="mb-3">
                                 <label htmlFor="country">Country</label>
-                                <select id="country" value={userData.country} onClick={getCountries}
+                                <select id="country" value={userData.country}
                                     className={`form-control ${errors.country ? "is-invalid" : ""}`}
                                     onChange={handleInputChange} >
                                     <option value="">Select a country</option>

@@ -1,3 +1,6 @@
-.nav-color { background-color: #a6859a; }
+.nav-color { background-color: #D8A7B1; }
 
-.icon-button-black { color: black; }
+.icon-button { 
+    color: #f8e0e4; 
+    font-weight: bold;
+}
