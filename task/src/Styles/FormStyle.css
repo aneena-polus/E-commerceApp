@@ -54,3 +54,5 @@ h2 { font-family: "DM Serif Text", serif; }
     transform: translateY(-50%);
     color: #888;
 }
+
+.text-justify { text-align: justify; }

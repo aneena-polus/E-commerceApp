@@ -1,6 +1,7 @@
 import Item from "../model/itemSchema.js";
 import fs from 'fs/promises';
 import Cart from "../model/cartSchema.js";
+import Order from "../model/orderSchema.js";
 
 export const getItemById = async (req, res) => {
     try {
@@ -85,9 +86,9 @@ export const updateUserCart = async (req, res) => {
         let cart = await Cart.findOne({ userId }).populate({ path: 'userId' });
         if (cart) {
             const itemIndex = cart.items.findIndex(item => item.itemId.toString() === itemId);
-            const findProductToBeUpdated = await Item.findById({_id:itemId});
+            const findProductToBeUpdated = await Item.findById({ _id: itemId });
             const quantityFlag = quantity !== undefined ? false : true;
-            if (itemIndex>-1 && cart.items[itemIndex].quantity + 1 > findProductToBeUpdated.quantity && quantityFlag ){
+            if (itemIndex > -1 && cart.items[itemIndex].quantity + 1 > findProductToBeUpdated.quantity && quantityFlag) {
                 return res.status(500).json({ error: "Exceeded availability of product." });
             }
             if (quantity === 0) {
@@ -131,7 +132,7 @@ export const getUserCartData = async (req, res) => {
 export const buyProductsFromCart = async (req, res) => {
     try {
         const { id } = req.body;
-        const cart = await Cart.findOne({ userId:id }); 
+        const cart = await Cart.findOne({ userId: id });
         const itemIds = cart.items.map((cartItem) => cartItem.itemId);
         const items = await Item.find({ _id: { $in: itemIds } });
         for (let cartItem of cart.items) {
@@ -144,10 +145,44 @@ export const buyProductsFromCart = async (req, res) => {
                 await item.save();
             }
         }
-        await Cart.deleteOne({ userId:id });
-        res.status(200).json({ message: "Items bought successfully!" });
+        let order = await Order.findOne({userId: id}).populate({ path: 'userId' });
+        if (order) {
+            order.items.push(...cart.items);
+        }
+        else {
+            order = new Order({ userId: id, items: cart.items });
+        }
+        await order.save();
+        await Cart.deleteOne({ userId: id });
+        res.status(200).json(order);
     } catch (err) {
         console.error("Error buying products:", err);
         res.status(500).json({ error: "An error occurred while buying products." });
+    }
+};
+
+export const getFilteredItems = async (req, res) => {
+    try {
+        const {searchQuery} = req.body || '';
+        const items = await Item.find().populate({ path: 'createUser' });
+        const filteredItems = items.filter(
+            (item) => item.title.toLowerCase().includes(searchQuery) 
+        );
+        res.json(filteredItems);
+    }
+    catch(err) {
+        console.log(err)
+        res.status(500).json({ error: `An error occurred while searching.${err}` });
+    }
+};
+
+export const getOrderHistory = async (req, res) => {
+    try {
+        const { id } = req.body;
+        const orders = await Order.findOne({ userId: id }).populate({ path: 'userId' }).populate({ path: 'items.itemId' });
+        res.json({orders: orders});
+    }
+    catch(err) {
+        res.status(500).json({ error: `An error occurred while getting history.${err}` });
     }
 };

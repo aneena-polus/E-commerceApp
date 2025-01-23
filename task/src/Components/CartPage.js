@@ -107,7 +107,11 @@ function CartPage() {
                         </div>
                     </div>
                 </div>
-            </div>) : <div>Cart is empty</div>}
+            </div>) : 
+            (<div className="text-center mt-4">
+                <h5>Cart is Empty</h5>
+                <p>Your cart is empty. Will appear once you add items to the cart.</p>
+            </div>)}
         </div>
     );
 }

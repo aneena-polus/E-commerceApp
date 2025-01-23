@@ -7,6 +7,7 @@ import ShopPage from "./Components/ShopPage";
 import CartPage from "./Components/CartPage"
 import Forbidden from "./Components/Forbidden"
 import ProductOverview from "./Components/ProductOverview";
+import OrderHistory from "./Components/OrderHistory";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                 <Route path="/sell" element={<><Navbar /><SellPage /></>} />
                 <Route path="/cart" element={<><Navbar /><CartPage /></>} />
                 <Route path="/shop/:id?" element={<><Navbar /><ProductOverview /></>} />
+                <Route path="/history" element={<><Navbar /><OrderHistory /></>} />
                 <Route path="/403" element={<Forbidden />} />
             </Routes>
             <ToastContainer

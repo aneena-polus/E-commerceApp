@@ -28,10 +28,10 @@ function Navbar() {
         setActiveButton("sell");
         navigate("/sell");
     }
-    // const gotoExplorePage = () => {
-    //     setActiveButton("explore");
-    //     navigate("/explore");
-    // }
+    const gotoHistoryPage = () => {
+        setActiveButton("history");
+        navigate("/history");
+    }
     const goToCart = () => {
         setActiveButton("cart");
         navigate("/cart");
@@ -53,9 +53,9 @@ function Navbar() {
                         Sell
                     </Link>
                 </IconButton>
-                <IconButton color="inherit" size="medium" title="Explore" style={{ borderRadius: "0" }}>
-                    <Link style={{ color: activeButton === "explore" ? "white" : "black", textDecoration: 'none', fontSize:"20px"  }}>
-                        Explore
+                <IconButton color="inherit" size="medium" title="History" onClick={gotoHistoryPage} style={{ borderRadius: "0" }}>
+                    <Link style={{ color: activeButton === "history" ? "white" : "black", textDecoration: 'none', fontSize:"20px"  }}>
+                        History
                     </Link>
                 </IconButton>
             </div>

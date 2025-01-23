@@ -34,3 +34,12 @@ export const buyProductsFromCart = () => {
     const userId = JSON.parse(localStorage.getItem('userData'))._id;
     return axios.put(`/api/buyProducts`,{id: userId}, { withCredentials: true });
 };
+
+export const getFilteredData = (title) => {
+    return axios.post(`/api/getFilteredData`,{searchQuery: title}, { withCredentials: true });
+};
+
+export const getOrderHistory = () => {
+    const userId = JSON.parse(localStorage.getItem('userData'))._id;
+    return axios.post(`/api/getOrderHistory`,{id: userId}, { withCredentials: true });
+};

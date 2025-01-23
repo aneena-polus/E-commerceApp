@@ -8,7 +8,7 @@ function ProductOverview() {
     const productToBeViewed = data.products.find((product) => product._id == data.productId);
 
     return (
-        <div className="container mt-4">
+        <div className="container my-4">
             <div className="row justify-content-between align-items-center">
                 <div className="col-md-8">
                     <h2 className="mb-3">Product Overview</h2>
@@ -26,7 +26,7 @@ function ProductOverview() {
                                 alt="Product"
                             />
                             <div><strong>About this item:</strong></div>
-                            <p className="card-text">{productToBeViewed.description}</p>
+                            <p className="card-text text-justify">{productToBeViewed.description}</p>
                         </div>
                     </div>
                 </div>
