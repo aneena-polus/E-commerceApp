@@ -113,7 +113,7 @@ function ShopPage() {
                                                 : <span className="badge bg-warning mb-1">Out of stock</span>
                                             }
                                             <div><ViewMore text={product.description} maxLength={15} /></div>
-                                            <strong className='fs-5'><h6 className='d-inline'>₹</h6>{product.amount}</strong>
+                                            <strong className='fs-5'><h6 className='d-inline'>₹</h6>{Number(product.amount).toFixed(2)}</strong>
                                         </div>
                                         <div className='d-flex justify-content-end align-items-end'>
                                             <span className='px-1'>

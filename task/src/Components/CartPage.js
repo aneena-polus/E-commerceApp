@@ -68,7 +68,7 @@ function CartPage() {
                                                 <div>
                                                     <h5>{product.itemId.title}</h5>
                                                     <div><ViewMore text={product.itemId.description} maxLength={25} /></div>
-                                                    <strong>₹{product.itemId.amount}</strong>
+                                                    <strong>₹{Number(product.itemId.amount).toFixed(2)}</strong>
                                                 </div>
                                                 <div className='d-flex justify-content-end align-items-end'>
                                                     <div className='d-flex align-items-end gap-3'>
@@ -97,7 +97,7 @@ function CartPage() {
                         <h2 className="text-center mb-4">CheckOut</h2>
                         <div>
                             <div className="mb-3"><strong>Total of: </strong>{items.length} items</div>
-                            <div className="mb-3"><strong>Total Amount:</strong> ₹{amount}</div>
+                            <div className="mb-3"><strong>Total Amount:</strong> ₹{Number(amount).toFixed(2)}</div>
                             <div className="d-flex justify-content-center">
                                 <IconButton
                                     size="small"

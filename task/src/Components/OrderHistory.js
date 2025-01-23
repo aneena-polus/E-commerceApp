@@ -10,7 +10,7 @@ function OrderHistory() {
     useEffect(() => {
         getOrderHistory()
             .then((response) => {
-                setOrderHistory(response.data.orders || []); 
+                setOrderHistory(response.data.orders || []);
             })
             .catch((error) => {
                 console.error('Error fetching order data:', error);
@@ -38,9 +38,11 @@ function OrderHistory() {
                                             maxLength={25}
                                         />
                                     </p>
-                                    <p className="card-text my-0">
-                                        <strong className='fs-5'>Price: <h6 className='d-inline'>₹</h6>{order.itemId?.amount}</strong>
-                                    </p>
+                                    <div className="card-text d-inline my-0">
+                                        <h6 className='d-inline'>₹</h6>
+                                        <h4 className='d-inline'>{Number(order.itemId?.amount).toFixed(2)}</h4>
+                                    </div>
+                                    <span className='text-body-secondary'>/count</span>
                                 </div>
                             </div>
                         </div>

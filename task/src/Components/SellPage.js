@@ -65,7 +65,7 @@ function SellPage() {
                                         <div>
                                             <h5 className='my-0'>{product.title}</h5>
                                             <div><ViewMore text={product.description} maxLength={25} /></div>
-                                            <strong className='fs-4'><h6 className='d-inline'>₹</h6>{product.amount}</strong>
+                                            <strong className='fs-4'><h6 className='d-inline'>₹</h6>{Number(product.amount).toFixed(2)}</strong>
                                             <div>
                                             {product.quantity > 0 ?
                                                 <span className="badge bg-success mb-1">In stock: {product.quantity}</span>

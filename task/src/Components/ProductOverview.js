@@ -44,7 +44,12 @@ function ProductOverview() {
                                 <span className="badge bg-info mb-3">In stock: {productToBeViewed.quantity}</span>
                                 : <span className="badge bg-warning">Out of stock</span>
                             }
-                            <div><h4 className='d-inline'><h6 className='d-inline'>₹</h6>{productToBeViewed.amount}</h4><span className='text-body-secondary'>/count</span></div> 
+                            <div>
+                                <h4 className='d-inline'>
+                                    <h6 className='d-inline'>₹</h6>{Number(productToBeViewed.amount).toFixed(2)}
+                                </h4>
+                                <span className='text-body-secondary'>/count</span>
+                            </div> 
                             <img
                                 src={`http://localhost:3000/uploads/${productToBeViewed.imageUrl}`}
                                 className="img-fluid mt-3"
