@@ -11,12 +11,6 @@ function ImageUploader({ onChange, image }) {
         }
     };
 
-    const handleDrop = (event) => {
-        event.preventDefault();
-        const file = event.dataTransfer.files[0];
-        handleFileSelect(file);
-    };
-
     const handleClick = () => {
         const fileInput = document.createElement("input");
         fileInput.type = "file";
@@ -31,17 +25,13 @@ function ImageUploader({ onChange, image }) {
 
     return (
         <div>
-            <div onDrop={handleDrop} onDragOver={(event) => event.preventDefault()}
-                onClick={handleClick} style={{
-                    border: "2px dashed #ccc", borderRadius: "8px", width: "300px",
-                    height: "200px", display: "flex", alignItems: "center", justifyContent: "center",
-                    cursor: "pointer", margin: "20px auto", textAlign: "center"
-                }}>
+            <div onDragOver={(event) => event.preventDefault()}
+                onClick={handleClick} className="image-uploader">
                 {selectedImage ? (
                     <img src={selectedImage !== image ? selectedImage : `http://localhost:3000/uploads/${image}`}
-                        alt="Preview" style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
+                        alt="Preview" className="card-image" />
                 ) : (
-                    <p>Drag and drop an image here, or click to upload</p>
+                    <p>Click to upload an image.</p>
                 )}
             </div>
         </div>
