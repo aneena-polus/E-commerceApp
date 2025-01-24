@@ -19,11 +19,10 @@ function ShopPage() {
         getAllProducts().then((response) => {
             dispatch(setAllShopItems(response.data || []));
         })
-            .catch((error) => {
-                console.error('Error fetching products:', error);
-                navigate('/403');
-                dispatch(setAllShopItems([]));
-            });
+        .catch((error) => {
+            console.error('Error fetching products:', error);
+            navigate('/403');
+        });
     }, [dispatch, navigate]);
 
     const addToCart = (itemId) => {
@@ -112,23 +111,24 @@ function ShopPage() {
                                                 <span className="badge bg-success mb-1">In stock</span>
                                                 : <span className="badge bg-warning mb-1">Out of stock</span>
                                             }
-                                            <div><ViewMore text={product.description} maxLength={15} /></div>
+                                            <div><ViewMore text={product.description} maxLength={40} /></div>
                                             <strong className='fs-5'><h6 className='d-inline'>₹</h6>{Number(product.amount).toFixed(2)}</strong>
                                         </div>
-                                        <div className='d-flex justify-content-end align-items-end'>
-                                            <span className='px-1'>
-                                                <button className='button-color' title="View Product" size="small" onClick={() => viewProduct(product._id)} >
-                                                    View Product
-                                                </button>
-                                            </span>
-                                            <span>
-                                                {product.quantity > 0 &&
-                                                    <button className='button-color' title="Add to Cart" size="small" onClick={() => addToCart(product._id)} >
-                                                        Add to Cart
-                                                    </button>}
-                                            </span>
-                                        </div>
                                     </div>
+                                    <div className='d-flex justify-content-end align-items-end'>
+                                        <span className='px-1'>
+                                            <button className='button-color fw-bold' title="View Product" size="small" onClick={() => viewProduct(product._id)} >
+                                                View Product
+                                            </button>
+                                        </span>
+                                        <span>
+                                            {product.quantity > 0 &&
+                                                <button className='button-color fw-bold' title="Add to Cart" size="small" onClick={() => addToCart(product._id)} >
+                                                    Add to Cart
+                                                </button>}
+                                        </span>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

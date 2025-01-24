@@ -16,8 +16,7 @@ function ProductOverview() {
         const userId = JSON.parse(localStorage.getItem('userData'))._id;
         const cart = { userId: userId, itemId: itemId };
         updateUserCart(cart).then((response) => {
-            if (response.data.message == "Item added to cart successfully.")
-                dispatch(setItemQuantity());
+            dispatch(setItemQuantity());
             dispatch(updateCartData(response.data));
             ToastMessage(response.data.message);
         })
@@ -36,7 +35,7 @@ function ProductOverview() {
                             <div className='d-flex justify-content-between align-items-center'>
                                 <h3 className="card-title my-0">{productToBeViewed.title}</h3>
                             {productToBeViewed.quantity > 0 &&
-                                <button className='button-color' title="Add to Cart" size="small" onClick={() => addToCart(productToBeViewed._id)}>
+                                <button className='button-color fw-bold' title="Add to Cart" size="small" onClick={() => addToCart(productToBeViewed._id)}>
                                     Add to Cart
                                 </button>}
                             </div>

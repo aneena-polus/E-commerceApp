@@ -29,7 +29,7 @@ const productSlice = createSlice({
             state.productData = action.payload.items;
         },//setting data to sell page
         setItemQuantity(state, action) {
-            state.cartCount = action.payload? state.cartCount -=1 :state.cartCount +=1;
+            state.cartCount = action.payload? state.cartCount -=action.payload :state.cartCount +=1;
         }, //updating cart count to cart when add to cart button is clicked
         setItem(state, action) {
             state.cartData = action.payload.cartData? action.payload.cartData : {};

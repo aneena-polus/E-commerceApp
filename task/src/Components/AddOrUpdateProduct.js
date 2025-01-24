@@ -6,14 +6,13 @@ import { validate } from '../Utilities/FormUtils.js';
 import { useDispatch } from 'react-redux';
 import { updateProductInList, addProductInList } from '../Redux/Slice/productSlice.js';
 import { ToastMessage } from '../Common/Toast.js';
-import { MuiFileInput } from 'mui-file-input'
 import { useNavigate } from 'react-router-dom';
+import ImageUploader from '../Common/ImageUploader.js';
 
 function AddOrUpdateProduct(props) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { productData } = useContext(ProductContext);
-    const [filePreview, setFilePreview] = useState("");
     const [newField, setnewField] = useState({
         title: productData?.title || '',
         description: productData?.description || '',
@@ -31,13 +30,6 @@ function AddOrUpdateProduct(props) {
             ...prevState,
             image: newValue
         }));
-        if (newValue) {
-            const fileURL = URL.createObjectURL(newValue);
-            setFilePreview(fileURL);
-        }
-        else {
-            setFilePreview("");
-        }
     };
 
     const onFormSubmission = (event) => {
@@ -62,7 +54,7 @@ function AddOrUpdateProduct(props) {
                 productData?._id
                     ? dispatch(updateProductInList(response.data))
                     : dispatch(addProductInList(response.data));
-                ToastMessage(productData?._id ? 'Product Updated Successfully!' : 'Product Created Successfully!');
+                ToastMessage(productData?._id ? 'Product Updated Successfully!' : 'Product Added Successfully!');
             })
             .catch((error) => {
                 console.error(productData?._id ? 'Error updating product:' : 'Error adding product:', error);
@@ -79,14 +71,15 @@ function AddOrUpdateProduct(props) {
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title fw-bold">{productData ? 'Edit Product' : 'Create Product'}</h5>
+                        <h5 className="modal-title fw-bold">{productData ? 'Edit Product' : 'Add Product'}</h5>
                         <button type="button" className="btn-close" title="Close" onClick={props.onClose}
                             aria-label="Close"></button>
                     </div>
                     <form onSubmit={onFormSubmission}>
                         <div className="modal-body">
                             <div className="mb-2">
-                                <label htmlFor="title" className="form-label fw-semibold">Title:</label>
+                                <label htmlFor="title" className="form-label fw-semibold">
+                                    <span className='text-danger'>*</span>Title:</label>
                                 <input type="text" id="title" name="title"
                                     value={newField.title} onChange={onInputChange}
                                     className={`form-control ${errors.title ? "is-invalid" : ""}`}
@@ -94,7 +87,8 @@ function AddOrUpdateProduct(props) {
                                 {errors.title && <div className="text-danger">*Title is required</div>}
                             </div>
                             <div className="mb-2">
-                                <label htmlFor="description" className="form-label fw-semibold">Description:</label>
+                                <label htmlFor="description" className="form-label fw-semibold">
+                                    <span className='text-danger'>*</span>Description:</label>
                                 <textarea id="description" name="description"
                                     value={newField.description} onChange={onInputChange}
                                     className={`form-control ${errors.description ? "is-invalid" : ""}`}
@@ -104,7 +98,8 @@ function AddOrUpdateProduct(props) {
                             <div className="mb-2">
                                 <div className='row'>
                                     <div className='col-6'>
-                                        <label htmlFor="amount" className="form-label fw-semibold">Amount:</label>
+                                        <label htmlFor="amount" className="form-label fw-semibold">
+                                            <span className='text-danger'>*</span>Amount:</label>
                                         <input type="text" id="amount" name="amount"
                                             value={newField.amount} onChange={onInputChange}
                                             className={`form-control ${errors.amount ? "is-invalid" : ""}`}
@@ -112,7 +107,8 @@ function AddOrUpdateProduct(props) {
                                         {errors.amount && <div className="text-danger">*Amount is required</div>}
                                     </div>
                                     <div className='col-6'>
-                                        <label htmlFor="quantity" className="form-label fw-semibold">Quantity:</label>
+                                        <label htmlFor="quantity" className="form-label fw-semibold">
+                                            <span className='text-danger'>*</span>Quantity:</label>
                                         <input type="text" id="quantity" name="quantity"
                                             value={newField.quantity} onChange={onInputChange}
                                             className={`form-control ${errors.quantity ? "is-invalid" : ""}`}
@@ -123,8 +119,9 @@ function AddOrUpdateProduct(props) {
                                 </div>
                             </div>
                             <div>
-                                <label htmlFor="image" className="form-label fw-semibold">Upload an image:</label>
-                                <MuiFileInput style={{ width: "100%" }} accept="image/*" onChange={handleFileChange} label={filePreview || newField.image} />
+                                <label htmlFor="image" className="form-label fw-semibold">
+                                    <span className='text-danger'>*</span>Upload an image:</label>
+                                    <ImageUploader onChange={(file)=>handleFileChange(file)} image={newField.image}/>
                                 {errors.image && <div className="text-danger">*Image is required</div>}
                             </div>
                         </div>
@@ -132,8 +129,8 @@ function AddOrUpdateProduct(props) {
                             <button type="button" className="btn btn-secondary" onClick={props.onClose}>
                                 Close
                             </button>
-                            <button type="submit" className="btn btn-success" title={productData ? 'Update' : 'Create'}>
-                                {productData ? 'Update' : 'Create'}
+                            <button type="submit" className="btn btn-success" title={productData ? 'Update' : 'Add'}>
+                                {productData ? 'Update' : 'Add'}
                             </button>
                         </div>
                     </form>

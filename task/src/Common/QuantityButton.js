@@ -27,7 +27,7 @@ function QuantityButton({ quantity, maxQuantity, onChange }) {
 
     return (
         <div className='border-design'>
-            <button className='button-color' style={{borderTopRightRadius: '0', borderBottomRightRadius: '0'}} size="small" aria-label="delete" onClick={decreaseQuantity} disabled={localQuantity < 0}>
+            <button className='button-color' style={{borderTopRightRadius: '0', borderBottomRightRadius: '0'}} size="small" aria-label="delete" onClick={decreaseQuantity} disabled={localQuantity <= 1}>
                 <RemoveIcon fontSize='inherit'/>
             </button>
             <span className='fw-bold px-2'> {localQuantity} </span>

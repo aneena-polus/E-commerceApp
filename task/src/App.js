@@ -22,13 +22,14 @@ function App() {
                 <Route path="/403" element={<Forbidden />} />
             </Routes>
             <ToastContainer
-                position="bottom-center"
+                position="bottom-right"
                 autoClose={2000}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick={false}
                 rtl={false}
                 draggable
+                className= "custom-toast-container"
                 theme="dark"
             />
         </div>

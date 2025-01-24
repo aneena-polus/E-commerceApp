@@ -3,3 +3,9 @@
     padding: 0;
     text-decoration: none;
 }
+
+.custom-toast-container .Toastify__toast {
+    min-height: 15px;
+    font-size: 13px;
+    padding: 10px;
+}

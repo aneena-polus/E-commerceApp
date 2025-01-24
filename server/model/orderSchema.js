@@ -11,6 +11,9 @@ const orderItemSchema = new mongoose.Schema({
         required: true,
         default: 1
     },
+    timestamp: {
+        type: Date
+    }
 });
 
 const orderSchema = new mongoose.Schema({

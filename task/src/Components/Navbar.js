@@ -37,43 +37,33 @@ function Navbar() {
     }
 
     return (
-        <div className='align-items-center nav-color d-flex justify-content-between w-100 px-2 py-1 icon-button-black'>
-            <div className='fw-bold d-flex text-center text-nav align-items-center fs-5'>
-                <ShoppingBagIcon fontSize="inherit" /><span>{" "}E-commerce App</span>
+        <div className="nav-color d-flex flex-wrap justify-content-between align-items-center w-100 px-2 py-1 icon-button-black">
+            <div className="fw-bold d-flex text-nav align-items-center fs-5 col-12 col-md-3 text-center mb-2 mb-md-0">
+                <ShoppingBagIcon fontSize="inherit" />E-commerce App
             </div>
-            <div>
-                <IconButton color="inherit" size="medium" title="Shop" onClick={goToShopPage} style={{ borderRadius: "0" }}>
-                    <Link color=" inherit" style={{ color: activeButton === "shop" ? "white" : "black", textDecoration: 'none', fontSize:"20px" }}>
-                        Shop
-                    </Link>
+            <div className="d-flex justify-content-center align-items-center col-12 col-md-6 mb-2 mb-md-0">
+                <IconButton color="inherit" size="medium" title="Shop" onClick={goToShopPage} className="px-2" style={{ borderRadius: "0" }}>
+                    <Link style={{ color: activeButton === "shop" ? "white" : "black", textDecoration: "none", fontSize: "20px" }}>Shop</Link>
                 </IconButton>
-                <IconButton color="inherit" size="medium" title="Sell" onClick={gotoSellPage} style={{ borderRadius: "0" }}>
-                    <Link style={{ color: activeButton === "sell" ? "white" : "black", textDecoration: 'none', fontSize:"20px"  }}>
-                        Sell
-                    </Link>
+                <IconButton color="inherit" size="medium" title="Sell" onClick={gotoSellPage} className="px-2" style={{ borderRadius: "0" }}>
+                    <Link style={{ color: activeButton === "sell" ? "white" : "black", textDecoration: "none", fontSize: "20px" }}>Sell</Link>
                 </IconButton>
-                <IconButton color="inherit" size="medium" title="History" onClick={gotoHistoryPage} style={{ borderRadius: "0" }}>
-                    <Link style={{ color: activeButton === "history" ? "white" : "black", textDecoration: 'none', fontSize:"20px"  }}>
-                        History
-                    </Link>
+                <IconButton color="inherit" size="medium" title="History" onClick={gotoHistoryPage} className="px-2" style={{ borderRadius: "0" }}>
+                    <Link style={{ color: activeButton === "history" ? "white" : "black", textDecoration: "none", fontSize: "20px" }}>History</Link>
                 </IconButton>
             </div>
-            <div>
-                <ul className="nav justify-content-end">
-                    <li className="nav-item">
+            <div className="col-12 col-md-3 d-flex justify-content-end">
+                <ul className="nav">
+                    <li className="nav-item me-2">
                         <IconButton color="inherit" size="medium" title="My Cart" onClick={goToCart}>
                             <Badge color="secondary" badgeContent={cartCount}>
-                                <ShoppingCartIcon style={{
-                                    color: activeButton === "cart" ? "white" : "black",
-                                }} fontSize="inherit" />
+                                <ShoppingCartIcon style={{ color: activeButton === "cart" ? "white" : "black" }} fontSize="inherit" />
                             </Badge>
                         </IconButton>
                     </li>
                     <li className="nav-item">
                         <IconButton color="secondary" size="medium" title="Sign Out" onClick={signOut}>
-                            <ExitToAppIcon style={{
-                                color: activeButton === "signout" ? "pink" : "black",
-                            }} fontSize="inherit" />
+                            <ExitToAppIcon style={{ color: activeButton === "signout" ? "pink" : "black" }} fontSize="inherit" />
                         </IconButton>
                     </li>
                 </ul>

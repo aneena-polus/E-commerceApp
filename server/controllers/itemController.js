@@ -20,7 +20,10 @@ export const getAllItems = async (req, res) => {
         const { _id } = req.body;
         const items = await Item.find().populate({ path: 'createUser' });
         const cart = await Cart.findOne({ userId: _id });
-        const cartCount = cart ? cart.items.length : 0;
+        let cartCount = 0;
+        cart?.items?.forEach((item) => {
+            cartCount += item.quantity;
+        });
         res.json({ items, cartCount });
     } catch (err) {
         console.error("Error fetching items:", err);
@@ -87,26 +90,23 @@ export const updateUserCart = async (req, res) => {
         if (cart) {
             const itemIndex = cart.items.findIndex(item => item.itemId.toString() === itemId);
             const findProductToBeUpdated = await Item.findById({ _id: itemId });
-            const quantityFlag = quantity !== undefined ? false : true;
-            if (itemIndex > -1 && cart.items[itemIndex].quantity + 1 > findProductToBeUpdated.quantity && quantityFlag) {
+            const isQuantity = quantity !== undefined ? false : true;
+            if (itemIndex > -1 && cart.items[itemIndex].quantity + 1 > findProductToBeUpdated.quantity && isQuantity) {
                 return res.status(500).json({ error: "Exceeded availability of product." });
             }
-            if (quantity === 0) {
+            if (quantity === 0) 
                 cart.items.splice(itemIndex, 1);
-            }
             else if (itemIndex > -1) {
                 cart.items[itemIndex].quantity = quantity !== undefined
                     ? quantity
                     : cart.items[itemIndex].quantity + 1;
                 itemUpdated = true;
             }
-            else {
+            else 
                 cart.items.push({ itemId, quantity: 1 });
-            }
         }
-        else {
+        else 
             cart = new Cart({ userId, items: [{ itemId, quantity: 1 }] });
-        }
         await cart.save();
         const updatedCartData = await Cart.findOne({ userId }).populate({ path: 'userId' }).populate({ path: 'items.itemId' });
         const message = itemUpdated
@@ -146,12 +146,12 @@ export const buyProductsFromCart = async (req, res) => {
             }
         }
         let order = await Order.findOne({userId: id}).populate({ path: 'userId' });
-        if (order) {
-            order.items.push(...cart.items);
-        }
-        else {
-            order = new Order({ userId: id, items: cart.items });
-        }
+        const newOrderItems = cart.items.map((cartItem) => ({
+            itemId: cartItem.itemId,
+            quantity: cartItem.quantity,
+            timestamp: new Date()
+        }));
+        order ? order.items.push(...newOrderItems) : order = new Order({ userId: id, items: newOrderItems });
         await order.save();
         await Cart.deleteOne({ userId: id });
         res.status(200).json(order);
