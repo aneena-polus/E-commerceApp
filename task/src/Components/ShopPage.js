@@ -66,12 +66,8 @@ function ShopPage() {
                 <h2>Start Shopping</h2>
                 <div className="search-container d-flex align-items-center justify-content-end">
                     <form className="search-container input-group">
-                        <input
-                            type="text"
-                            className="form-control search-input"
-                            placeholder="Search products..."
-                            onChange={filterTitle}
-                            aria-label="Search"
+                        <input type="text" className="form-control search-input"
+                            placeholder="Search products..." onChange={filterTitle} aria-label="Search"
                         />
                         <i className="fas fa-search search-icon"></i>
                     </form>

@@ -49,11 +49,8 @@ function ProductOverview() {
                                 </h4>
                                 <span className='text-body-secondary'>/count</span>
                             </div> 
-                            <img
-                                src={`http://localhost:3000/uploads/${productToBeViewed.imageUrl}`}
-                                className="img-fluid mt-3"
-                                alt="Product"
-                            />
+                            <img src={`http://localhost:3000/uploads/${productToBeViewed.imageUrl}`}
+                                className="img-fluid mt-3" alt="Product" />
                             <div><strong>About this item:</strong></div>
                             <p className="card-text text-justify">{productToBeViewed.description}</p>
                         </div>

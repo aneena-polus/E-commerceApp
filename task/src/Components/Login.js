@@ -58,23 +58,15 @@ function Login() {
                         <form onSubmit={handleLogin}>
                             <div className="mb-3">
                                 <label htmlFor="username" className="form-label">Username</label>
-                                <input
-                                    type="text"
-                                    className={`form-control ${errors.username ? "is-invalid" : ""}`}
-                                    id="username"
-                                    onChange={handleInputChange}
-                                    placeholder="Enter username"
+                                <input type="text" className={`form-control ${errors.username ? "is-invalid" : ""}`}
+                                    id="username" onChange={handleInputChange} placeholder="Enter username"
                                 />
                                 {errors.username && <div className="text-danger">*Username is required</div>}
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="password" className="form-label">Password</label>
-                                <input
-                                    type="password"
-                                    className={`form-control ${errors.password ? "is-invalid" : ""}`}
-                                    id="password"
-                                    onChange={handleInputChange}
-                                    placeholder="Enter password"
+                                <input type="password" className={`form-control ${errors.password ? "is-invalid" : ""}`}
+                                    id="password" onChange={handleInputChange} placeholder="Enter password"
                                 />
                                 {errors.password && <div className="text-danger">*Password is required</div>}
                                 {loginError && <div className="text-danger">{loginError}</div>}

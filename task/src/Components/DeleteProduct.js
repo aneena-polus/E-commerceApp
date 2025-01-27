@@ -29,21 +29,11 @@ function DeleteProduct(props) {
 
     return (
         <>
-            <IconButton
-                title="Delete Product"
-                color="inherit"
-                size="medium"
-                onClick={() => setModalOpen(true)}
-            >
+            <IconButton title="Delete Product" color="inherit" size="medium" onClick={() => setModalOpen(true)}>
                 <DeleteOutlineIcon fontSize="inherit" />
             </IconButton>
-
             {isModalOpen && (
-                <AlertDialogModal
-                    open={isModalOpen}
-                    onClose={() => setModalOpen(false)}
-                    onConfirm={handleConfirmDelete}
-                />
+                <AlertDialogModal open={isModalOpen} onClose={() => setModalOpen(false)} onConfirm={handleConfirmDelete} />
             )}
         </>
     );

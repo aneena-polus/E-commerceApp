@@ -29,11 +29,8 @@ function OrderHistory() {
                                 <div className="card-body">
                                     <div className="row">
                                         <div className="col-md-4 text-center">
-                                            <img
-                                                src={`http://localhost:3000/uploads/${order.itemId?.imageUrl}`}
-                                                className="img-fluid rounded-start"
-                                                alt="alternate"
-                                            />
+                                            <img src={`http://localhost:3000/uploads/${order.itemId?.imageUrl}`}
+                                                className="img-fluid rounded-start" alt="alternate" />
                                         </div>
                                         <div className="col-md-8 d-flex justify-content-between flex-column">
                                             <div>
